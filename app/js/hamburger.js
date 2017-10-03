@@ -7,25 +7,36 @@
  * @throws {HamburgerException}  При неправильном использовании
  */
 function Hamburger(size, stuffing) {
-    this.size = size;
-    this.stuffing = stuffing;
-    this.topping = [];
+    try {
+        if (arguments[0] == undefined && arguments[1] == undefined)
+            throw new HamburgerException('wrong count arguments are set');
+        if (arguments[1].type != 'STUFFING')
+            throw new HamburgerException('invalid stuffing ');
+        if (arguments[0].type != 'SIZE')
+            throw new HamburgerException('invalid size ');
+        this.size = size;
+        this.stuffing = stuffing;
+        this.topping = [];
+
+    } catch (e) {
+        e.getMessage();
+    }
 }
 
-function ItemOfHam(name, price, calories) {
-    this.name = name;
+function ItemOfHam(type, price, calories) {
+    this.type = type;
     this.price = price;
     this.calories = calories;
 }
 
 /* Размеры, виды начинок и добавок */
-Hamburger.SIZE_SMALL = new ItemOfHam('Small', 50, 20);
-Hamburger.SIZE_LARGE = new ItemOfHam('Large', 100, 40);
-Hamburger.STUFFING_CHEESE = new ItemOfHam('Cheese', 10, 20);
-Hamburger.STUFFING_SALAD = new ItemOfHam('Salad', 20, 5);
-Hamburger.STUFFING_POTATO = new ItemOfHam('Potato', 15, 10);
-Hamburger.TOPPING_MAYO = new ItemOfHam('Mayo', 20, 5);
-Hamburger.TOPPING_SPICE = new ItemOfHam('Spice', 15, 0);
+Hamburger.SIZE_SMALL = new ItemOfHam('SIZE', 50, 20);
+Hamburger.SIZE_LARGE = new ItemOfHam('SIZE', 100, 40);
+Hamburger.STUFFING_CHEESE = new ItemOfHam('STUFFING', 10, 20);
+Hamburger.STUFFING_SALAD = new ItemOfHam('STUFFING', 20, 5);
+Hamburger.STUFFING_POTATO = new ItemOfHam('STUFFING', 15, 10);
+Hamburger.TOPPING_MAYO = new ItemOfHam('TOPPING', 20, 5);
+Hamburger.TOPPING_SPICE = new ItemOfHam('TOPPING', 15, 0);
 
 /**
  * Добавить добавку к гамбургеру. Можно добавить несколько
@@ -36,12 +47,15 @@ Hamburger.TOPPING_SPICE = new ItemOfHam('Spice', 15, 0);
  */
 Hamburger.prototype.addTopping = function(topping) {
     try {
+        if (topping.type != 'TOPPING')
+            throw new HamburgerException('wrong type set, waiting topping');
         if (this.topping.indexOf(topping) === -1)
             this.topping.push(topping);
         else
-            throw new SyntaxError("This object was already added");
+            throw new HamburgerException("duplicate topping " + topping.type);
+
     } catch (e) {
-        console.log('Error ' + e.name + ":" + e.message);
+        e.getMessage();
     }
 }
 
@@ -54,10 +68,12 @@ Hamburger.prototype.addTopping = function(topping) {
  */
 Hamburger.prototype.removeTopping = function(topping) {
     try {
+        if (topping.type != 'TOPPING')
+            throw new HamburgerException('wrong type set');
         if (this.topping.indexOf(topping) === -1)
-            throw new SyntaxError("This ogject wasn't added")
+            throw new HamburgerException("topping not founded");
     } catch (e) {
-        console.log('Error ' + e.name + ":" + e.message);
+        e.getMessage();
     }
 }
 
@@ -94,7 +110,7 @@ Hamburger.prototype.calculatePrice = function() {
     if (this.getToppings().lenght != 0)
         sum = this.topping.reduce(function(sum, current) {
             return sum + current.price;
-        },0);
+        }, 0);
     sum += this.size.price + this.stuffing.price;
     return sum;
 }
@@ -108,7 +124,7 @@ Hamburger.prototype.calculateCalories = function() {
     if (this.getToppings().lenght != 0)
         sum = this.topping.reduce(function(sum, current) {
             return sum + current.calories
-        },0);
+        }, 0);
     sum += this.size.calories + this.stuffing.calories;
     return sum;
 }
@@ -118,7 +134,9 @@ Hamburger.prototype.calculateCalories = function() {
  * Подробности хранятся в свойстве message.
  * @constructor
  */
-function HamburgerException(name, message) {
-    this.name = name;
+function HamburgerException(message) {
     this.message = message;
+    this.getMessage = function() {
+        console.log('Hamburger Exception : ' + message);
+    }
 }

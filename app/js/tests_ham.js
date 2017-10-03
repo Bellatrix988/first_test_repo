@@ -15,3 +15,17 @@ console.log("Is hamburger large: %s", hamburger.getSize() === Hamburger.SIZE_LAR
 // Убрать добавку
 hamburger.removeTopping(Hamburger.TOPPING_SPICE);
 console.log("Have %d toppings", hamburger.getToppings().length); // 1
+
+
+// не передали обязательные параметры
+var h2 = new Hamburger(); // => HamburgerException: no size given
+
+// передаем некорректные значения, добавку вместо размера
+var h3 = new Hamburger(Hamburger.TOPPING_SPICE, Hamburger.TOPPING_SPICE);
+// => HamburgerException: invalid size 'TOPPING_SAUCE'
+
+// добавляем много добавок
+var h4 = new Hamburger(Hamburger.SIZE_SMALL, Hamburger.STUFFING_CHEESE);
+hamburger.addTopping(Hamburger.TOPPING_MAYO);
+hamburger.addTopping(Hamburger.TOPPING_MAYO);
+// HamburgerException: duplicate topping 'TOPPING_MAYO'
