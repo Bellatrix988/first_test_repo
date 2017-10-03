@@ -8,11 +8,11 @@
  */
 function Hamburger(size, stuffing) {
     try {
-        if (arguments[0] == undefined && arguments[1] == undefined)
+        if (size == undefined && stuffing == undefined)
             throw new HamburgerException('wrong count arguments are set');
-        if (arguments[1].type != 'STUFFING')
+        if (stuffing.type != 'STUFFING')
             throw new HamburgerException('invalid stuffing ');
-        if (arguments[0].type != 'SIZE')
+        if (size.type != 'SIZE')
             throw new HamburgerException('invalid size ');
         this.size = size;
         this.stuffing = stuffing;
@@ -123,7 +123,7 @@ Hamburger.prototype.calculateCalories = function() {
     let sum = 0;
     if (this.getToppings().lenght != 0)
         sum = this.topping.reduce(function(sum, current) {
-            return sum + current.calories
+            return sum + current.calories;
         }, 0);
     sum += this.size.calories + this.stuffing.calories;
     return sum;
