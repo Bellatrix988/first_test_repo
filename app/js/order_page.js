@@ -2,12 +2,19 @@ let indSize = document.getElementById("slSize").selectedIndex;
 let indStuffing = document.getElementById("slStuffing").selectedIndex;
 
 let tastyHam = new Hamburger(BUFF_SIZE[indSize], BUFF_STUFFING[indStuffing]);
+let arrHistory = [];
 
 function createObj() {
     indSize = document.getElementById("slSize").selectedIndex;
     indStuffing = document.getElementById("slStuffing").selectedIndex;
 
     tastyHam = new Hamburger(BUFF_SIZE[indSize], BUFF_STUFFING[indStuffing]);
+
+    let toppings = document.getElementsByName("topping");
+    toppings.forEach(function(item) {
+        if (item.checked)
+            tastyHam.addTopping(BUFF_TOPPING[item.value - 1]);
+    });
 
     calc();
 };
@@ -18,19 +25,25 @@ function controllTopping(self) {
     console.log(topping.price + ' ' + self.checked);
     if (self.checked) {
         tastyHam.addTopping(topping);
-        console.log('add');
     } else {
         tastyHam.removeTopping(topping);
-        console.log('remove');
     }
     calc();
 };
 
 function calc() {
-    document.getElementById("outPrice").value = tastyHam.calculatePrice();
-    document.getElementById("outCalories").value = tastyHam.calculateCalories();
+    let price = tastyHam.calculatePrice();
+    let calories = tastyHam.calculateCalories();
+    document.getElementById("outPrice").value = price;
+    document.getElementById("outCalories").value = calories;
+    arrHistory.push({ p: price, c: calories });
+    print({ p: price, c: calories });
 }
 
-// function addOrder(){
-
-// }
+function print(item) {
+    let list = document.getElementById("orderList");
+    let li = document.createElement("li");
+    li.appendChild(document.createTextNode('Price: ' + item.p + ' Calories: ' + item.c));
+    li.className = 'list-group-item';
+    list.appendChild(li);
+}

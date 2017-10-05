@@ -38,8 +38,8 @@ Hamburger.TOPPING_MAYO = new ItemOfHam(20, 5);
 Hamburger.TOPPING_SPICE = new ItemOfHam(15, 0);
 
 const BUFF_SIZE = [Hamburger.SIZE_SMALL, Hamburger.SIZE_LARGE];
-const BUFF_STUFFING = [Hamburger.STUFFING_CHEESE, Hamburger.STUFFING_POTATO,
-                Hamburger.STUFFING_SALAD];
+const BUFF_STUFFING = [Hamburger.STUFFING_CHEESE,
+                Hamburger.STUFFING_SALAD, Hamburger.STUFFING_POTATO];
 const BUFF_TOPPING = [Hamburger.TOPPING_MAYO, Hamburger.TOPPING_SPICE];
 
 
