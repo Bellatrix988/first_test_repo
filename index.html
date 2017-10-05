@@ -9,32 +9,45 @@
 </head>
 
 <body>
-    <h3>Hello!!!</h3>
-    <section class="content">
+    <h3>Hello!</h3>
+    <h5></h5>
+    <section class="content" hidden="true">
         <button id="btn">Click Me</button>
     </section>
     <section class="hamburger">
-        <div>
-            <label for="">Select size</label>
-            <select name="" id="">
-                <option>Smoll</option>
-                <option>Large</option>
-            </select>
-        </div>
-        <div>
-            <label for="">Select Stuffing</label>
-            <select name="" id="">
-                <option value="">Cheese</option>
-                <option value="">Salad</option>
-                <option value="">Potato</option>
-            </select>
-        </div>
-        <div>
-            <label for="">Select topping</label>
-            <select name="" id="">
-                <option value="">Mayo</option>
-                <option value="">Spece</option>
-            </select>
+        <form>
+            <div class="form-group">
+                <label for="slSize">Select size</label>
+                <select class="form-control" id="slSize">
+                    <option>Smoll</option>
+                    <option>Large</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="slStuffing">Select stuffing</label>
+                <select class="form-control" id="slStuffing">
+                    <option>Cheese</option>
+                    <option>Salad</option>
+                    <option>Potato</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="slTopping">Add topping</label>
+                <select multiple class="form-control" id="slTopping">
+                    <option>Mayo</option>
+                    <option>Spece</option>
+                </select>
+            </div>
+            <button class="btn btn-success" onclick="calc()">Calculate</button>
+            <div class="form-group">
+                <label for="outPrice">Price</label>
+                <input class="form-control" type="text" id="outPrice" readonly>
+            </div>
+            <div class="form-group">
+                <label for="outCalories">Calories</label>
+                <input class="form-control" type="text" id="outCalories" readonly>
+            </div>
+        </form>
     </section>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -42,6 +55,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
     <script type="text/javascript" src="app/js/count_click.js"></script>
     <script type="text/javascript" src="app/js/hamburger.js"></script>
+    <script type="text/javascript" src="app/js/order_page.js"></script>
     <script type="text/javascript" src="app/js/tests_ham.js"></script>
 </body>
 

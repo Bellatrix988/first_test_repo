@@ -3,3 +3,8 @@
   -webkit-justify-content: center;
   justify-content: center;
 }
+
+.hamburger{
+  width: 50%;
+  margin: 0 25%;
+}
