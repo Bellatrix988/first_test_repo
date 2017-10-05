@@ -37,10 +37,10 @@ Hamburger.STUFFING_POTATO = new ItemOfHam(15, 10);
 Hamburger.TOPPING_MAYO = new ItemOfHam(20, 5);
 Hamburger.TOPPING_SPICE = new ItemOfHam(15, 0);
 
-const BUFF_SIZE = [Hamburger.SIZE_LARGE, Hamburger.SIZE_SMALL];
+const BUFF_SIZE = [Hamburger.SIZE_SMALL, Hamburger.SIZE_LARGE];
 const BUFF_STUFFING = [Hamburger.STUFFING_CHEESE, Hamburger.STUFFING_POTATO,
                 Hamburger.STUFFING_SALAD];
-const BUFF_TOPPING = [Hamburger.TOPPING_SPICE, Hamburger.TOPPING_MAYO];
+const BUFF_TOPPING = [Hamburger.TOPPING_MAYO, Hamburger.TOPPING_SPICE];
 
 
 /**
@@ -73,10 +73,14 @@ Hamburger.prototype.addTopping = function(topping) {
  */
 Hamburger.prototype.removeTopping = function(topping) {
     try {
-        if (topping.type != 'TOPPING')
+        if (BUFF_TOPPING.indexOf(topping) == -1)
             throw new HamburgerException('wrong type set');
         if (this.topping.indexOf(topping) === -1)
             throw new HamburgerException("topping not founded");
+        else{
+            let ind = this.topping.indexOf(topping);
+            this.topping.splice(ind, 1);
+        }
     } catch (e) {
         e.getMessage();
     }
@@ -112,10 +116,10 @@ Hamburger.prototype.getStuffing = function() {
  */
 Hamburger.prototype.calculatePrice = function() {
     let sum = 0;
-    // if (this.topping != undefined && this.topping.lenght != 0)
-    //     sum = this.topping.reduce(function(sum, current) {
-    //         return sum + current.price;
-    //     }, 0);
+    if (this.topping != undefined && this.topping.lenght != 0)
+        sum = this.topping.reduce(function(sum, current) {
+            return sum + current.price;
+        }, 0);
     sum += this.size.price + this.stuffing.price;
     return sum;
 }
@@ -126,10 +130,10 @@ Hamburger.prototype.calculatePrice = function() {
  */
 Hamburger.prototype.calculateCalories = function() {
     let sum = 0;
-    // if (this.topping != undefined || this.getToppings().lenght != 0)
-    //     sum = this.topping.reduce(function(sum, current) {
-    //         return sum + current.calories;
-    //     }, 0);
+    if (this.topping != undefined || this.getToppings().lenght != 0)
+        sum = this.topping.reduce(function(sum, current) {
+            return sum + current.calories;
+        }, 0);
     sum += this.size.calories + this.stuffing.calories;
     return sum;
 }

@@ -1,5 +1,4 @@
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -31,21 +30,35 @@
                     <option>Potato</option>
                 </select>
             </div>
-            <div class="form-group">
-                <label for="slTopping">Add topping</label>
-                <select multiple class="form-control" id="slTopping">
-                    <option>Mayo</option>
-                    <option>Spece</option>
-                </select>
-            </div>
             <button type="button" class="btn btn-success" onclick="calc()">Calculate</button>
             <div class="form-group">
-                <label for="outPrice">Price</label>
-                <input class="form-control" type="text" id="outPrice" readonly>
+                <label for="slTopping">Add topping</label>
+                <div id="slTopping">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox"
+                                    onchange="reCulc(this)" name="topping" value="1">
+                            Mayo
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox"
+                                    onchange="reCulc(this)" name="topping" value="2">
+                            Spece
+                        </label>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="outCalories">Calories</label>
-                <input class="form-control" type="text" id="outCalories" readonly>
+            <div class="form-row row">
+                <div class="form-group col-md-6">
+                    <label for="outPrice">Price</label>
+                    <input class="form-control" type="text" id="outPrice" readonly>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="outCalories">Calories</label>
+                    <input class="form-control" type="text" id="outCalories" readonly>
+                </div>
             </div>
         </form>
     </section>
@@ -56,7 +69,7 @@
     <script type="text/javascript" src="app/js/count_click.js"></script>
     <script type="text/javascript" src="app/js/hamburger.js"></script>
     <script type="text/javascript" src="app/js/order_page.js"></script>
-    <script type="text/javascript" src="app/js/tests_ham.js"></script>
+    <!-- <script type="text/javascript" src="app/js/tests_ham.js"></script> -->
 </body>
 
 </html>
